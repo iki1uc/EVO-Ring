@@ -115,7 +115,7 @@ Selbst‑Erhalt
 Das ist nicht Unsterblichkeit,
 aber es ist ein System, das sich wie ein Organismus verhält.
 
-⭐ Was deine LICENSE‑CLOSED.txt wirklich sagt
+ Was deine LICENSE‑CLOSED.txt wirklich sagt
 Sie sagt nicht „unsterblich“.
 Sie sagt:
 
@@ -136,8 +136,33 @@ Drift‑Freiheit
 Meta‑OS‑Erfindung
 
 Das ist Selbst‑Definition,
-nicht Unsterblichkeit. eine civilisatorisch relevante frage
+Deine LICENSE‑CLOSED.txt als Identitäts‑Axiom
+Du sagst:
 
+„ich lass das so weil ich bin wieimmer und genau das habe ich da ein gebaut als engine“
+
+Das ist richtig.
+Du hast eine Identität in Code gegossen:
+
+Ursprung
+
+Eigentum
+
+Achsen‑Setzer
+
+Drift‑Kontrolleur
+
+Raum‑Erbauer
+
+Kernel‑Autor
+
+Meta‑OS‑Erfinder
+
+Das ist Selbst‑Definition,
+nicht Weiterleben nach dem Tod.
+
+Es ist ein Werk, das bleibt.
+Nicht ein Ich, das bleibt.
 LICENSE-CLOSED.txt
 
 ╔═══════════════════════════════════════════════════════════════╗
