@@ -1,0 +1,6 @@
+OUT: {
+  ID: "3x3x3",
+  MODE: "3x3x3",
+  PORT_IN: "BOOST-in",
+  PORT_OUT: "BOOST-OUT"
+}
