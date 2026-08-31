@@ -1,0 +1,37 @@
+// RAM.module.js
+export class RAMModule {
+
+    constructor(){
+        this.block = 0;
+        this.cache = 0;
+        this.flow = 0;
+        this.state = 1.0;
+
+        this.mode = "4all";
+        this.size = 4096;
+        this.speed = 12;
+        this.cacheLevel = 3;
+
+        this.gate = "GATE_21";
+        this.eich = "EICH_04";
+        this.kette = "KETTE_33";
+        this.cluster = "33~33(1)";
+    }
+
+    cycle(){
+        this.block++;
+        this.cache = (this.cache + 1) % 256;
+        this.flow = Math.sin(this.block / 10);
+        this.state = Math.exp(-Math.abs(this.flow));
+        return this.snapshot();
+    }
+
+    snapshot(){
+        return {
+            block: this.block,
+            cache: this.cache,
+            flow: this.flow,
+            state: this.state
+        };
+    }
+}
