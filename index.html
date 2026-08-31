@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EVO‑RING · TÜFTLER‑EDITION · iki1uc</title>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
+        body{background:#0a0a12;color:#d0d9e6;font-family:'Orbitron','Consolas',monospace;padding:12px;min-height:100vh}
+        h1{text-align:center;letter-spacing:6px;font-weight:300;font-size:24px;background:linear-gradient(90deg,#ffd700,#00ccff,#ff66ff,#00ff88);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:2px}
+        h1 small{font-size:10px;display:block;color:#3d5a70;-webkit-text-fill-color:#3d5a70;letter-spacing:3px}
+        .flex{display:flex;flex-wrap:wrap;gap:4px;align-items:center;margin:3px 0}
+        .panel{background:rgba(255,255,255,0.03);padding:10px;border-radius:8px;margin-bottom:8px;border:1px solid rgba(0,200,255,0.06)}
+        .panel h3{font-size:10px;color:#3d5a70;letter-spacing:2px;margin-bottom:4px;text-transform:uppercase}
+        .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+        @media(max-width:700px){.grid2{grid-template-columns:1fr}}
+        .layer-card{background:rgba(0,0,0,0.3);border-radius:6px;padding:8px;border:1px solid #1a1a2a;margin-bottom:6px;transition:0.3s}
+        .layer-card:hover{border-color:#3d5a70}
+        .layer-card .title{font-size:9px;color:#66ccff;font-weight:bold;letter-spacing:2px}
+        .layer-card .badge{font-size:7px;color:#3d5a70;margin-left:6px}
+        .layer-card .modules{display:flex;flex-wrap:wrap;gap:2px;margin-top:4px}
+        .layer-card .modules .mod{font-size:6px;padding:1px 6px;border-radius:3px;background:#0a0a0a;border:1px solid #1a1a2a;color:#5a7a8a;cursor:pointer;transition:0.2s}
+        .layer-card .modules .mod:hover{color:#d0d9e6;border-color:#3d5a70}
+        .layer-card .modules .mod.active{color:#6bffa9;border-color:#6bffa9}
+        .layer-card .modules .mod.off{color:#ff6b8a;border-color:#ff6b8a}
+        button{background:#0f0;color:#000;font-weight:bold;border:none;padding:4px 12px;border-radius:4px;font-family:monospace;font-size:9px;cursor:pointer;margin:2px}
+        button:hover{background:#0ff}
+        button.sec{background:transparent;color:#0f0;border:1px solid #0f0}
+        button.sec:hover{background:#0f0;color:#000}
+        button.gold{background:#ffd700;color:#000}
+        button.gold:hover{background:#ffaa00}
+        button.attack{background:#ff6b8a;color:#000}
+        button.attack:hover{background:#ff4466}
+        .console{background:#0a0a0a;padding:6px;border-radius:4px;font-size:7px;color:#3d5a70;max-height:100px;overflow-y:auto;border:1px solid #111;line-height:1.4;margin-top:4px}
+        .console .ok{color:#6bffa9}
+        .console .warn{color:#ffd700}
+        .console .info{color:#66ccff}
+        .console .err{color:#ff6b8a}
+        .console .attack{color:#ff6b8a;font-weight:bold}
+        .stat-row{display:flex;flex-wrap:wrap;gap:6px;font-size:8px;color:#5a7a8a;margin:4px 0}
+        .stat-row span{background:rgba(255,255,255,0.02);padding:2px 8px;border-radius:3px}
+        .stat-row .val{color:#ffd700}
+        .canvas-wrap{background:#0a0a0a;border-radius:8px;border:1px solid #1a1a2a;overflow:hidden;position:relative}
+        #evoCanvas{width:100%;height:auto;display:block}
+        .badge{display:inline-block;padding:1px 6px;border-radius:4px;font-size:7px;margin:1px}
+        .badge.green{background:#0a2a1a;color:#6bffa9}
+        .badge.gold{background:#2a1a0a;color:#ffd700}
+        .badge.info{background:#0a1a2a;color:#66ccff}
+        .badge.off{background:#1a0a0a;color:#ff6b8a}
+        .cmd-line{font-size:8px;color:#3d5a70;background:#060608;padding:4px 8px;border-radius:4px;font-family:monospace;border:1px solid #111}
+    </style>
+</head>
+<body>
+
+<h1>⚡ EVO‑RING · TÜFTLER</h1>
+<h1 style="font-size:11px;margin-top:-2px;background:none;-webkit-text-fill-color:#3d5a70;color:#3d5a70;font-weight:400">ALLE SCHICHTEN · MODULE · LEBENDIG</h1>
+
+<div class="panel">
+    <div class="flex" style="justify-content:space-between">
+        <div class="flex">
+            <button class="gold" onclick="runCycle()">🌀 EVO‑CYCLE</button>
+            <button class="attack" onclick="ncAttack()">💥 NC‑ATTACK</button>
+            <button class="sec" onclick="toggleAutorun()">⏱ AUTORUN</button>
+            <button onclick="resetAll()">⟲ RESET</button>
+            <button onclick="toggleLayer('all')">📂 ALLE</button>
+        </div>
+        <div class="stat-row">
+            <span>ACHSEN: <span id="achsenVal" class="val">756</span></span>
+            <span>ENGINE: <span id="engineVal" class="val">0</span></span>
+            <span>MARKT: <span id="marktVal" class="val">0</span></span>
+            <span>BOERSE: <span id="boerseVal" class="val">0</span></span>
+            <span>RING: <span id="ringVal" class="val" style="color:#66ccff">●</span></span>
+        </div>
+    </div>
+    <div class="cmd-line" id="cmdLine">⏳ system bereit · EVO‑RING aktiv</div>
+</div>
+
+<div class="grid2">
+    <!-- Linke Spalte: Schichten + Module -->
+    <div>
+        <div id="layerContainer">
+            <!-- Wird per JS gefüllt -->
+        </div>
+        <div class="panel">
+            <h3>📜 CONSOLE · LOG</h3>
+            <div class="console" id="consoleLog">⏳ EVO‑RING initialisiert...</div>
+        </div>
+    </div>
+
+    <!-- Rechte Spalte: Canvas + Status -->
+    <div>
+        <div class="panel canvas-wrap">
+            <canvas id="evoCanvas" width="800" height="450"></canvas>
+        </div>
+        <div class="panel">
+            <h3>📊 MODUL‑STATUS</h3>
+            <div id="moduleStatus" style="font-size:7px;color:#3d5a70;line-height:1.6;max-height:120px;overflow-y:auto">
+                ⏳ lade Module...
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// ============================================================
+// EVO‑RING · TÜFTLER‑EDITION · iki1uc
+// ============================================================
+
+// ─── STATE ──────────────────────────────────────────────────────
+const STATE = {
+    achsen: 756,
+    dims: [3, 9, 27, 81, 243, 729],
+    engine: 0,
+    industry: 0,
+    markt: 0,
+    boerse: 0,
+    cycle: 0,
+    running: false,
+    autorun: false,
+    attack: false,
+    layerFilter: 'all',
+    modules: {}
+};
+
+// ─── SCHICHTEN + MODULE ────────────────────────────────────────
+const LAYERS = {
+    'API': {
+        icon: '📡',
+        modules: [
+            'api.js', 'api.grid', 'ANIME_QUANT.js', 'AXIS_SCALE.js', 'DRUUCK.js',
+            'ENTKORREKTOR.engine.js', 'Geopulator.js', 'PIPE.js', 'RAMmind.js',
+            'SYNAXIOM.js', 'TEAM_RENDER.js', 'UI_TEAM_CONNECT.js', 'ZOOG.js',
+            'arg.sync', 'axiom.collector.js', 'axiom.pipeline.js', 'axiom1.net.js',
+            'data.reorg.js', 'energie.js', 'evo.total.js', 'golden6.js', 'kit.js',
+            'markt.js', 'port.js', 'quant.syn', 'ring.js', 'sli.sys', 'story.reorg.js',
+            'story.run', 'tmp.bogen', 'unit.js', 'work.js', 'work.status'
+        ]
+    },
+    'ANKER': {
+        icon: '⚓',
+        modules: ['243/', '27.js', '3.js', '9.js', '81.js', '81.room', '9hoch9.json', 'PRE9×9.math', 'OUR.js']
+    },
+    'NC': {
+        icon: '🧠',
+        modules: ['NC.math', 'NC.feld', 'NC.suite']
+    },
+    'ULTRA': {
+        icon: '⚡',
+        modules: ['ULTRA‑NC3×3.room', 'ULTRA‑NC9×9.room', 'ultra.kernel.js']
+    },
+    'ROOM': {
+        icon: '🚪',
+        modules: ['X.room.CORE', 'X.room.IN', 'X.room.OUT', 'respo_bridge.js', 'rith.engine.js', 'schnitt.js', 'tmp.js']
+    },
+    'UI': {
+        icon: '🎨',
+        modules: ['ghost.html', 'ghost.js', 'index.html', 'lage.js', 'navigator9.js', 'ring.dom.js', 'geo.html', 'sli.active', 'ui.SLI.remix.ready', 'ID.html', 'home.js', 'city.js', 'evo.city.dom.js']
+    },
+    'USER': {
+        icon: '👤',
+        modules: ['user.html', 'user.ready', 'user.json']
+    },
+    'GPU/CACHE/RAM': {
+        icon: '💾',
+        modules: ['gpu/', 'CACHE.core.js', 'CACHE.pipe.js', 'CACHE.result.json', 'CACHE.score.js', 'CACHE‑ID.js', 'cache.mind.js', 'RAM.hardware.js', 'RAM.module', 'RAM‑ID.js', 'axiom-hardware-6.csv']
+    },
+    'RÄUME': {
+        icon: '🌌',
+        modules: ['RUN', 'ACHSE.respo', 'ROOT.respo', 'TMP.respo']
+    }
+};
+
+// ─── DOM ────────────────────────────────────────────────────────
+const canvas = document.getElementById('evoCanvas');
+const ctx = canvas.getContext('2d');
+const consoleLog = document.getElementById('consoleLog');
+const cmdLine = document.getElementById('cmdLine');
+
+let autorunInterval = null;
+
+// ─── LOG ────────────────────────────────────────────────────────
+function log(msg, type = 'info') {
+    const t = new Date().toLocaleTimeString();
+    const cls = type === 'ok' ? 'ok' : type === 'warn' ? 'warn' : type === 'err' ? 'err' : type === 'attack' ? 'attack' : 'info';
+    consoleLog.innerHTML += `<div class="${cls}">[${t}] ${msg}</div>`;
+    consoleLog.scrollTop = consoleLog.scrollHeight;
+    if (consoleLog.children.length > 50) consoleLog.removeChild(consoleLog.firstChild);
+}
+
+function cmd(msg) {
+    cmdLine.textContent = msg;
+}
+
+// ─── RENDER LAYERS ─────────────────────────────────────────────
+function renderLayers(filter = 'all') {
+    const container = document.getElementById('layerContainer');
+    container.innerHTML = '';
+
+    Object.entries(LAYERS).forEach(([name, layer]) => {
+        if (filter !== 'all' && name !== filter) return;
+
+        const card = document.createElement('div');
+        card.className = 'layer-card';
+        card.innerHTML = `
+            <div class="title">${layer.icon} ${name} <span class="badge">${layer.modules.length}</span></div>
+            <div class="modules">
+                ${layer.modules.map(m => `<span class="mod" data-layer="${name}" data-mod="${m}" onclick="toggleMod('${name}','${m}')">${m}</span>`).join('')}
+            </div>
+        `;
+        container.appendChild(card);
+    });
+}
+
+// ─── TOGGLE MOD ────────────────────────────────────────────────
+const modStates = {};
+
+function toggleMod(layer, mod) {
+    const key = `${layer}:${mod}`;
+    modStates[key] = !modStates[key];
+    const el = document.querySelector(`.mod[data-mod="${mod}"]`);
+    if (el) {
+        el.className = 'mod' + (modStates[key] ? ' active' : ' off');
+    }
+    const status = modStates[key] ? 'aktiviert' : 'deaktiviert';
+    log(`🔘 ${mod} · ${status}`, modStates[key] ? 'ok' : 'warn');
+    updateModuleStatus();
+}
+
+// ─── UPDATE MODULE STATUS ──────────────────────────────────────
+function updateModuleStatus() {
+    const el = document.getElementById('moduleStatus');
+    const total = Object.keys(modStates).length;
+    const active = Object.values(modStates).filter(v => v).length;
+    el.innerHTML = `
+        <span class="badge green">●</span> AKTIV: ${active}
+        <span class="badge off">●</span> INAKTIV: ${total - active}
+        <span class="badge gold">●</span> GESAMT: ${total}
+        <br>${Object.entries(modStates).filter(([k,v]) => v).map(([k]) => k).join(' · ') || 'keine aktiven Module'}
+    `;
+}
+
+// ─── TOGGLE LAYER ──────────────────────────────────────────────
+function toggleLayer(name) {
+    STATE.layerFilter = name;
+    renderLayers(name);
+    log(`📂 FILTER: ${name}`, 'info');
+}
+
+// ─── CANVAS · EVO‑RING ─────────────────────────────────────────
+function drawRing() {
+    const w = canvas.width, h = canvas.height;
+    const cx = w/2, cy = h/2;
+    const r = Math.min(w, h) * 0.35;
+
+    ctx.clearRect(0, 0, w, h);
+
+    // Hintergrund
+    const grad = ctx.createRadialGradient(cx, cy, 10, cx, cy, w/2);
+    grad.addColorStop(0, '#0a0a1a');
+    grad.addColorStop(0.5, '#050510');
+    grad.addColorStop(1, '#000000');
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, w, h);
+
+    // Ringe (Dims)
+    const colors = ['#ffd700', '#ff4444', '#00ccff', '#ff66ff', '#00ff88', '#ff8800'];
+    STATE.dims.forEach((d, idx) => {
+        const rad = r * (0.15 + idx * 0.14);
+        const alpha = 0.08 + (idx / STATE.dims.length) * 0.12;
+        ctx.strokeStyle = colors[idx] + Math.floor(alpha * 255).toString(16).padStart(2, '0');
+        ctx.lineWidth = 1.5;
+        ctx.setLineDash([4, 8]);
+        ctx.beginPath();
+        ctx.arc(cx, cy, rad, 0, Math.PI * 2);
+        ctx.stroke();
+        ctx.setLineDash([]);
+        ctx.fillStyle = colors[idx] + '66';
+        ctx.font = '7px monospace';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'bottom';
+        ctx.fillText(d, cx + rad * 0.85, cy - 4);
+    });
+
+    // Achsen-Partikel
+    const axes = Math.min(756, 150 + STATE.achsen * 0.1);
+    for (let i = 0; i < axes; i++) {
+        const angle = (i / axes) * Math.PI * 2 + STATE.cycle * 0.002;
+        const dist = r * (0.25 + (i / axes) * 0.5);
+        const x = cx + Math.cos(angle) * dist;
+        const y = cy + Math.sin(angle) * dist;
+        const alpha = 0.02 + (i / axes) * 0.04;
+        const size = 1 + (i / axes) * 2;
+        ctx.fillStyle = `rgba(255,215,0,${alpha})`;
+        ctx.beginPath();
+        ctx.arc(x, y, size, 0, Math.PI * 2);
+        ctx.fill();
+    }
+
+    // Engine-Puls (Zentrum)
+    const pulse = 0.3 + 0.7 * (0.5 + 0.5 * Math.sin(STATE.cycle * 0.05));
+    const engineRad = 8 + STATE.engine * 0.02;
+    const grad2 = ctx.createRadialGradient(cx, cy, 2, cx, cy, engineRad + 10);
+    grad2.addColorStop(0, `rgba(255,215,0,${0.3 + pulse * 0.4})`);
+    grad2.addColorStop(0.5, `rgba(0,200,255,${0.1 + pulse * 0.2})`);
+    grad2.addColorStop(1, `rgba(0,0,0,0)`);
+    ctx.fillStyle = grad2;
+    ctx.beginPath();
+    ctx.arc(cx, cy, engineRad + 10, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.fillStyle = '#ffd700';
+    ctx.shadowColor = '#ffd700';
+    ctx.shadowBlur = 30;
+    ctx.font = 'bold 14px monospace';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText('⏺', cx, cy);
+    ctx.shadowBlur = 0;
+
+    // 180° Linie
+    ctx.strokeStyle = 'rgba(255,255,255,0.04)';
+    ctx.lineWidth = 0.5;
+    ctx.setLineDash([2, 6]);
+    ctx.beginPath();
+    ctx.moveTo(cx - r, cy);
+    ctx.lineTo(cx + r, cy);
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    // Status-Text
+    ctx.fillStyle = '#445555';
+    ctx.font = '6px monospace';
+    ctx.textAlign = 'left';
+    ctx.textBaseline = 'bottom';
+    ctx.fillText(`ENGINE: ${Math.round(STATE.engine)}`, 10, h - 10);
+    ctx.fillText(`MARKT: ${Math.round(STATE.markt)}`, 10, h - 2);
+    ctx.textAlign = 'right';
+    ctx.fillText(`ACHSEN: ${STATE.achsen}`, w - 10, h - 10);
+    ctx.fillText(`CYCLE: ${STATE.cycle}`, w - 10, h - 2);
+
+    // Attack-Modus
+    if (STATE.attack) {
+        ctx.fillStyle = 'rgba(255,68,68,0.04)';
+        ctx.fillRect(0, 0, w, h);
+        ctx.fillStyle = '#ff6b8a';
+        ctx.font = 'bold 18px monospace';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'top';
+        ctx.fillText('⚡ NC‑ATTACK ⚡', cx, 10);
+    }
+}
+
+// ─── RUN CYCLE ──────────────────────────────────────────────────
+function runCycle() {
+    STATE.cycle++;
+    const dim = STATE.dims[STATE.cycle % STATE.dims.length];
+
+    STATE.engine = (STATE.engine + dim * 0.1) % 1000;
+    STATE.industry = (STATE.industry + dim * 0.15) % 1000;
+    STATE.markt = (STATE.markt + dim * 0.2) % 1000;
+    STATE.boerse = (STATE.boerse + dim * 0.05) % 1000;
+
+    document.getElementById('engineVal').textContent = Math.round(STATE.engine);
+    document.getElementById('marktVal').textContent = Math.round(STATE.markt);
+    document.getElementById('boerseVal').textContent = Math.round(STATE.boerse);
+
+    drawRing();
+    cmd(`🌀 CYCLE ${STATE.cycle} · ${dim} · Engine:${Math.round(STATE.engine)}`);
+    if (STATE.cycle % 5 === 0) {
+        log(`🌀 CYCLE ${STATE.cycle} · ${dim} · Engine:${Math.round(STATE.engine)} · Markt:${Math.round(STATE.markt)}`, 'info');
+    }
+}
+
+// ─── NC‑ATTACK ──────────────────────────────────────────────────
+function ncAttack() {
+    STATE.attack = !STATE.attack;
+    if (STATE.attack) {
+        log('💥 NC‑ATTACK AKTIVIERT · alle Systeme scharf', 'attack');
+        cmd('⚡ NC‑ATTACK · AKTIV');
+        // Alle Module aktivieren
+        Object.keys(LAYERS).forEach(layer => {
+            LAYERS[layer].modules.forEach(mod => {
+                const key = `${layer}:${mod}`;
+                modStates[key] = true;
+            });
+        });
+        renderLayers(STATE.layerFilter);
+        updateModuleStatus();
+        // Attack-Boost
+        for (let i = 0; i < 5; i++) runCycle();
+        log('💥 ALLE MODULE AKTIVIERT · Score +100', 'attack');
+    } else {
+        log('💥 NC‑ATTACK deaktiviert', 'info');
+        cmd('⏸ NC‑ATTACK · INAKTIV');
+    }
+    document.querySelector('.attack').style.borderColor = STATE.attack ? '#ff6b8a' : '';
+}
+
+// ─── AUTORUN ──────────────────────────────────────────────────
+function toggleAutorun() {
+    STATE.autorun = !STATE.autorun;
+    if (STATE.autorun) {
+        autorunInterval = setInterval(() => {
+            runCycle();
+            if (Math.random() > 0.8) {
+                const layers = Object.keys(LAYERS);
+                const rand = layers[Math.floor(Math.random() * layers.length)];
+                log(`🌀 AUTO · ${rand} aktiviert`, 'warn');
+            }
+        }, 1200);
+        log('⏱ AUTORUN gestartet', 'ok');
+        cmd('▶ AUTORUN · AKTIV');
+    } else {
+        clearInterval(autorunInterval);
+        autorunInterval = null;
+        log('⏱ AUTORUN gestoppt', 'info');
+        cmd('⏸ AUTORUN · INAKTIV');
+    }
+}
+
+// ─── RESET ──────────────────────────────────────────────────────
+function resetAll() {
+    STATE.cycle = 0;
+    STATE.engine = 0;
+    STATE.industry = 0;
+    STATE.markt = 0;
+    STATE.boerse = 0;
+    STATE.attack = false;
+    STATE.autorun = false;
+    if (autorunInterval) { clearInterval(autorunInterval); autorunInterval = null; }
+    Object.keys(modStates).forEach(k => modStates[k] = false);
+    document.getElementById('engineVal').textContent = '0';
+    document.getElementById('marktVal').textContent = '0';
+    document.getElementById('boerseVal').textContent = '0';
+    renderLayers('all');
+    updateModuleStatus();
+    log('⟲ RESET · System zurückgesetzt', 'warn');
+    cmd('⟲ RESET · BEREIT');
+    drawRing();
+}
+
+// ─── INIT ──────────────────────────────────────────────────────
+function init() {
+    renderLayers('all');
+    updateModuleStatus();
+    log('🚀 EVO‑RING · TÜFTLER‑EDITION geladen', 'ok');
+    log(`📦 ${Object.keys(LAYERS).length} Schichten · ${Object.values(LAYERS).reduce((a,l) => a + l.modules.length, 0)} Module`, 'info');
+    cmd('⏳ system bereit · EVO‑RING aktiv');
+    drawRing();
+    // Auto-Ring-Animation
+    setInterval(() => {
+        if (!STATE.autorun && !STATE.attack) {
+            STATE.cycle++;
+            drawRing();
+        }
+    }, 100);
+    // Auto-Status
+    setInterval(() => {
+        document.getElementById('ringVal').textContent = STATE.attack ? '⚡' : '●';
+        document.getElementById('ringVal').style.color = STATE.attack ? '#ff6b8a' : '#66ccff';
+    }, 500);
+}
+
+// ─── EXPOSE ──────────────────────────────────────────────────
+window.runCycle = runCycle;
+window.ncAttack = ncAttack;
+window.toggleAutorun = toggleAutorun;
+window.resetAll = resetAll;
+window.toggleLayer = toggleLayer;
+window.toggleMod = toggleMod;
+
+init();
+console.log('⚡ EVO‑RING · TÜFTLER‑EDITION · iki1uc');
+</script>
+</body>
+</html>
