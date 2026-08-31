@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>◉ SPRUNG – Einigungs-Modul der Industrie 6.0</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+<div class="orbit">
+
+    <h1>◉ INDUSTRIE‑6.0 – VISUAL MOVES</h1>
+
+    <div id="symbols" class="symbol-panel"></div>
+
+    <div id="live" class="live-panel"></div>
+
+   <div class="orbit">
+
+    <h1>◉ INDUSTRIE‑6.0 – VISUAL MOVES</h1>
+
+    <div id="symbols" class="symbol-panel"></div>
+
+    <div id="live" class="live-panel"></div>
+
+    <div class="controls">
+        <button onclick="VISUAL_MOVE('SPRUNG', SPRUNG(9))">SPRUNG</button>
+        <button onclick="VISUAL_MOVE('NEXT', SPRUNG(9).next)">SPRUNG.next</button>
+        <button onclick="VISUAL_MOVE('NC.engine', NC.run(9))">NC.engine</button>
+        <button onclick="VISUAL_MOVE('GEO.all', GEOG.all(9))">GEO.geo</button>
+        <button onclick="VISUAL_MOVE('GEO.physik', GEOP.cube(9))">GEO.physik</button>
+        <button onclick="VISUAL_MOVE('DYN.axis', DYN.axis('SPRUNG', 9))">DYN.axis</button>
+        <button onclick="VISUAL_MOVE('SURE', SURE(9))">SURE</button>
+        <button onclick="VISUAL_MOVE('ZEN', ZEN(9))">ZEN</button>
+        <button onclick="VISUAL_MOVE('HARDWARE', HARDWARE(9))">Hardware</button>
+        <button onclick="VISUAL_MOVE('NEO', NEO(9))">NEO</button>
+        <button onclick="VISUAL_MOVE('OLDCITY', OLDCITY.all())">OLDCITY</button>
+        <button onclick="VISUAL_MOVE('NEUCITY', NEUCITY.city(3))">NEUCITY</button>
+    </div>
+
+</div>
+
+</div>
+
+        body {
+            background: #0b0d10;
+            color: #d0d9e6;
+            font-family: 'Courier New', monospace;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .orbit {
+            max-width: 1200px;
+            width: 100%;
+            background: #14181e;
+            border: 1px solid #2a3340;
+            border-radius: 48px;
+            padding: 2.5rem 2rem;
+            box-shadow: 0 0 60px rgba(0, 180, 255, 0.06);
+        }
+
+        .sprung-head {
+            text-align: center;
+            border-bottom: 1px dashed #2a3a4a;
+            padding-bottom: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .sprung-head h1 {
+            font-size: 4.5rem;
+            font-weight: 300;
+            letter-spacing: 0.2em;
+            color: #b8e2ff;
+            text-shadow: 0 0 20px rgba(80, 200, 255, 0.15);
+        }
+
+        .sprung-head .sub {
+            font-size: 0.9rem;
+            color: #6a7f94;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            margin-top: 0.5rem;
+        }
+
+        .sprung-head .sign {
+            font-size: 3rem;
+            line-height: 1;
+            color: #7fc9ff;
+            margin: 0.5rem 0;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.8rem;
+            margin: 2rem 0;
+        }
+
+        .card {
+            background: #1a212a;
+            border-radius: 24px;
+            padding: 1.5rem 1.2rem;
+            border-left: 3px solid #2f4b66;
+            transition: 0.2s;
+        }
+
+        .card:hover {
+            border-left-color: #6fc3ff;
+            background: #1f2833;
+        }
+
+        .card h3 {
+            color: #8ab8e6;
+            font-weight: 400;
+            letter-spacing: 0.1em;
+            font-size: 1.1rem;
+            border-bottom: 1px solid #26303d;
+            padding-bottom: 0.4rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .card .value {
+            font-size: 1.3rem;
+            color: #c0daf5;
+            word-break: break-all;
+        }
+
+        .card .meta {
+            font-size: 0.75rem;
+            color: #5b728b;
+            margin-top: 0.6rem;
+        }
+
+        .sprung-code {
+            background: #0e131b;
+            border-radius: 20px;
+            padding: 1.2rem 1.5rem;
+            font-size: 0.8rem;
+            border: 1px solid #25303e;
+            overflow-x: auto;
+            color: #a0c0e0;
+            margin: 2rem 0 1rem;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+
+        .sprung-code .hl {
+            color: #7fc9ff;
+        }
+
+        .sprung-code .cmt {
+            color: #4a6a7a;
+        }
+
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+            font-size: 0.75rem;
+            color: #3d5268;
+            border-top: 1px solid #1f2a36;
+            padding-top: 1.5rem;
+        }
+
+        .footer span {
+            letter-spacing: 0.05em;
+        }
+
+        .badge {
+            display: inline-block;
+            background: #1d2a38;
+            padding: 0.2rem 1rem;
+            border-radius: 40px;
+            color: #7fc9ff;
+            font-size: 0.7rem;
+            letter-spacing: 0.1em;
+        }
+    </style>
+</head>
+<body>
+
+<div class="orbit">
+
+    <!-- SPRUNG HEAD -->
+    <div class="sprung-head">
+        <div class="sign">◉</div>
+        <h1>SPRUNG</h1>
+        <div class="sub">Einigungs‑Modul der Industrie‑6.0</div>
+        <div style="font-size:0.85rem; color:#4d6a85; margin-top:0.6rem;">
+            ◉ Start · Übergang · Verbindung · Zentralpunkt
+        </div>
+    </div>
+
+    <!-- MODUL-ÜBERSICHT (alle logischen Räume) -->
+    <div class="grid">
+        <div class="card">
+            <h3>◉ NOel</h3>
+            <div class="value">Identität</div>
+            <div class="meta">Kern · Selbst</div>
+        </div>
+        <div class="card">
+            <h3>◉ ROLE</h3>
+            <div class="value">Aufgabe</div>
+            <div class="meta">Rolle · Pfad</div>
+        </div>
+        <div class="card">
+            <h3>◉ GONE</h3>
+            <div class="value">Reset</div>
+            <div class="meta">Löschung · Null</div>
+        </div>
+        <div class="card">
+            <h3>◉ WAVE</h3>
+            <div class="value">Loop</div>
+            <div class="meta">Zyklus · Wiederkehr</div>
+        </div>
+        <div class="card">
+            <h3>◉ NC.engine</h3>
+            <div class="value">Bewegung</div>
+            <div class="meta">Dynamik · Fluss</div>
+        </div>
+        <div class="card">
+            <h3>◉ GEO.geo</h3>
+            <div class="value">Segment</div>
+            <div class="meta">Raum · Bereich</div>
+        </div>
+        <div class="card">
+            <h3>◉ GEO.physik</h3>
+            <div class="value">Kraft</div>
+            <div class="meta">Energie · Wirkung</div>
+        </div>
+        <div class="card">
+            <h3>◉ DYN</h3>
+            <div class="value">Achse</div>
+            <div class="meta">Richtung · Vektor</div>
+        </div>
+        <div class="card">
+            <h3>◉ SURE</h3>
+            <div class="value">Stand</div>
+            <div class="meta">Position · Halt</div>
+        </div>
+        <div class="card">
+            <h3>◉ ZEN</h3>
+            <div class="value">Neutral</div>
+            <div class="meta">Gleichgewicht · Mitte</div>
+        </div>
+        <div class="card">
+            <h3>◉ HARDWARE</h3>
+            <div class="value">CPU · RAM · ROM · GPU</div>
+            <div class="meta">Physisch · Basis</div>
+        </div>
+        <div class="card">
+            <h3>◉ NEO</h3>
+            <div class="value">Höhe · Breite · Tiefe</div>
+            <div class="meta">Dimension · Ausdehnung</div>
+        </div>
+    </div>
+
+    <!-- OLDCITY / NEUCITY – GEO Segmente (aus oldcity.js) -->
+    <div style="margin: 2rem 0 1rem; border-top:1px solid #1f2a36; padding-top:1.5rem;">
+        <div style="display:flex; gap:1rem; flex-wrap:wrap; align-items:center; margin-bottom:1rem;">
+            <span class="badge">◉ OLDCITY</span>
+            <span style="color:#5b728b; font-size:0.8rem;">HY · PE · PER – Segmente des Sprungs</span>
+        </div>
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px,1fr)); gap:1rem;">
+            <div style="background:#111920; border-radius:16px; padding:1rem;">
+                <div style="color:#7fc9ff; font-weight:300;">HY</div>
+                <div style="font-size:0.9rem; color:#b0cce8;">◉, 3, 9, ◎, 81, 3↺</div>
+                <div style="font-size:0.7rem; color:#3d5a70;">cache: false</div>
+            </div>
+            <div style="background:#111920; border-radius:16px; padding:1rem;">
+                <div style="color:#7fc9ff; font-weight:300;">PE</div>
+                <div style="font-size:0.9rem; color:#b0cce8;">◉, 9, ◎, 81, ◆, △, ▣</div>
+                <div style="font-size:0.7rem; color:#3d5a70;">cache: false</div>
+            </div>
+            <div style="background:#111920; border-radius:16px; padding:1rem;">
+                <div style="color:#7fc9ff; font-weight:300;">PER</div>
+                <div style="font-size:0.9rem; color:#b0cce8;">3, 9, 81, ◆, 756, △, 27, ▣, 3↺</div>
+                <div style="font-size:0.7rem; color:#3d5a70;">cache: false</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- NEUCITY – Leitbahn & GegenCache & TMP (aus neucity.js) -->
+    <div style="margin: 2rem 0 1rem; border-top:1px solid #1f2a36; padding-top:1.5rem;">
+        <div style="display:flex; gap:1rem; flex-wrap:wrap; align-items:center; margin-bottom:1rem;">
+            <span class="badge">◉ NEUCITY</span>
+            <span style="color:#5b728b; font-size:0.8rem;">Leitbahn · GegenCache · TMP</span>
+        </div>
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px,1fr)); gap:1rem;">
+            <div style="background:#111920; border-radius:16px; padding:1rem;">
+                <div style="color:#7fc9ff;">Leitbahn (v=3)</div>
+                <div style="font-size:0.85rem; color:#b0cce8;">Breite: 9 · Höhe: 27 · Tiefe: 81 · Trans: 243</div>
+            </div>
+            <div style="background:#111920; border-radius:16px; padding:1rem;">
+                <div style="color:#7fc9ff;">GegenCache</div>
+                <div style="font-size:0.75rem; color:#b0cce8;">HY.reverse() · PE.reverse() · PER.reverse()</div>
+            </div>
+            <div style="background:#111920; border-radius:16px; padding:1rem;">
+                <div style="color:#7fc9ff;">TMP Resultierende</div>
+                <div style="font-size:0.75rem; color:#b0cce8;">TMPa (_a) · TMPb (_b) · TMPg (_g)</div>
+                <div style="font-size:0.7rem; color:#3d5a70;">value: 3</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SPRUNG Code (aus oldcity.js / neucity.js) -->
+    <div class="sprung-code">
+        <span class="cmt">// SPRUNG – Einigungs‑Modul der Industrie‑6.0</span>
+        <br />
+        <span class="hl">export const SPRUNG</span> = (v) => ({<br />
+        &nbsp;&nbsp;sign: <span style="color:#b8e2ff;">"◉"</span>,<br />
+        &nbsp;&nbsp;value: v,<br />
+        &nbsp;&nbsp;next: v + 1,<br />
+        &nbsp;&nbsp;unify: <span style="color:#7fc9ff;">true</span>,<br />
+        &nbsp;&nbsp;mode: <span style="color:#b8e2ff;">"SPRUNG"</span><br />
+        });<br /><br />
+        <span class="cmt">// NEUCITY – Leitbahn, GegenCache, TMP</span><br />
+        <span class="hl">export const NEUCITY</span> = { ... };<br /><br />
+        <span class="cmt">// OLDCITY – HY, PE, PER</span><br />
+        <span class="hl">export const OLDCITY</span> = { ... };
+    </div>
+
+    <!-- FOOTER / ORBIT-RAUM -->
+    <div class="footer">
+        <span>◉ SPRUNG · Orbit-Raum · Alle logischen Räume</span>
+        <span>Respo · Index · Industrie‑6.0</span>
+        <span style="color:#2f4b66;">◉ general :: spock :: sprung</span>
+    </div>
+function SYMBOL_RENDER(list) {
+    const out = document.getElementById("symbols");
+    out.innerHTML = list.map(x => `<span class="sym">${x}</span>`).join(" ");
+}
+SYMBOL_RENDER(OLDCITY.HY().seg);
+SYMBOL_RENDER(OLDCITY.PE().seg);
+SYMBOL_RENDER(OLDCITY.PER().seg);
+SYMBOL_RENDER(NEUCITY.gegenCache().HY);
+
+</div>
+
+</body>
+</html>
