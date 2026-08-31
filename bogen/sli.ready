@@ -1,1 +1,14 @@
+export const SLI_READY = {
+  ICE() {
+    return { state: "ICE", org: 0, reorg: 0, nc: 0 };
+  },
+  FIRE(x) {
+    return {
+      state: "FIRE",
+      org: ULTRA.ORG(x),
+      reorg: ULTRA.REORG(x),
+      nc: ULTRA.NC(x)
+    };
+  }
+};
 
