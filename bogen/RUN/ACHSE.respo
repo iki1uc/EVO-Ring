@@ -1,0 +1,41 @@
+ACHSE‑RESPO:
+TMP‑A
+LAGE‑A
+AXIS‑A
+PIPE‑4
+
+# INDUSTRY‑ALGORITHMUS
+ACHSE‑A4‑PUMP =
+  upx(
+    upy(
+      upz(
+        TMP‑PUMP(
+          HY, PE, PER,
+          DA, NE, BEN,
+          TRANS, WARB, KANAL
+        )
+      )
+    )
+  )
+
+# TMP‑PUMP
+TMP‑PUMP(stationen):
+  cache.load(stationen)
+  cache.pump(128)
+  cache.flush()
+  return stationen
+
+# PIPE‑4‑GREIFLOGIK
+PIPE‑4 greift wenn:
+  d e i n o r s u w = geschlossen
+  TMP‑A = stabil
+  LAGE‑A = gültig
+  AXIS‑A = vollständig
+  CPU‑PREDICT = Gewinn > Risiko
+
+# BESCHLEUNIGUNG
+ACCEL =
+  HY → PE → PER → TRANS → WARB → KANAL
+  DA → NE → BEN
+  upx + upy + upz
+  TMP‑128‑Cache

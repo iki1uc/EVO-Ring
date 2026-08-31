@@ -1,0 +1,42 @@
+# TMP‑RESPO · Axiom‑4
+# Neuaufbau · iki1uc · Predictive‑Jump
+
+TMP = CORE‑TMP
+TMP‑LAGE = 16x16 / 8x8
+TMP‑STACK = 128
+TMP‑MYSTERY = Q / D / F
+
+# CPU‑SPRUNG‑VORHERSAGE
+TMP‑CPU = upx( upz( upy(AIR/AIV) TMP ) TMP ) TMP
+
+# FUNKTION
+- Höhe stabil
+- Breite stabil
+- Mystery stabil
+- AIR/AIV‑Wechsel antizipiert
+- Q/D/F automatisch positioniert
+- 128‑Stack schützt gegen Drift
+- Nur aktiv, wenn Gewinn > Risiko
+
+# POSITIONIERUNG
+TMP‑POS = 
+  ROOT‑0
+  ACHSE‑A
+  TMP‑A
+  LAGE‑A
+
+# Axiom‑4 Bindung
+TMP‑A4 =
+  ROOT + ACHSE + TMP
+  6e‑Matrix
+  81‑Matrix
+  X‑Operator
+  BENCH = TRUE
+
+# EINSPANNUNG
+TMP‑ACTIVE =
+  Nur wenn:
+    Trefferquote > 0.6
+    Position gültig
+    Achse stabil
+    Mystery geschlossen

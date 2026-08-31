@@ -1,0 +1,40 @@
+export const A4_FREQ = {
+
+  // Dreieck-Grundform
+  triangle: ["ROOT", "ACHSE", "TMP"],
+
+  // Frequenz-Schichten
+  layers: {
+    seq: "freq.html",
+    stamp: "stamp.html",
+    wave: "wave.html"
+  },
+
+  // Frequenz-Identität
+  identity() {
+    return {
+      core: "Axiom-4",
+      triangle: this.triangle,
+      layers: this.layers
+    };
+  },
+
+  // Frequenz-Bewegung
+  move(state) {
+    return {
+      from: state,
+      to: this.triangle[(this.triangle.indexOf(state) + 1) % 3],
+      wave: "ACTIVE"
+    };
+  },
+
+  // Frequenz-Erinnerung
+  remember(event) {
+    return {
+      event,
+      stamp: true,
+      wave: true,
+      seq: true
+    };
+  }
+};

@@ -1,0 +1,48 @@
+# ROOT‑RESPO · Axiom‑4
+# Neuaufbau · iki1uc · CPU‑Predictive‑Root
+
+ROOT = CORE‑ROOT
+ROOT‑STATE = Neutral
+ROOT‑LEVEL = 0
+
+# Grundlagen
+TMP‑0   = TMP‑ROOT
+LAGE‑0  = LAGE‑ROOT
+AXIS‑0  = ACHSE‑ROOT
+PIPE‑0  = PIPE‑ROOT
+
+# CPU‑SPRUNG‑VORHERSAGE (Root‑Ebene)
+ROOT‑CPU =
+  upx(
+    upz(
+      upy(AIR/AIV)
+      TMP‑0
+    )
+    TMP‑0
+  )
+  TMP‑0
+
+# FUNKTION
+- Root stabilisiert alle Achsen
+- AIR/AIV‑Wechsel wird abgefangen
+- Q/D/F Mystery‑Achsen werden neutralisiert
+- 0‑Ebene verhindert Drift
+- Root ist nicht aktiv, sondern reaktiv
+
+# Axiom‑4 Bindung
+ROOT‑A4 =
+  ROOT + ACHSE + TMP
+  erzeugt:
+    6e‑Matrix
+    81‑Matrix
+    X‑Operator
+    BENCH = TRUE
+
+# EINSPANNUNG
+ROOT‑ACTIVE =
+  Nur wenn:
+    TMP‑ACTIVE = TRUE
+    ACHSE‑A stabil
+    Position gültig
+    Gewinn > Risiko
+ 
