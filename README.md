@@ -1,30 +1,26 @@
-.
-
-🔵 HY
+🔵 HY — Hybrid‑Pfad
 ◉ → 3 → 9 → ◎ → 81 → 3 ↺
 
-Das ist der Hybrid‑Pfad:
+◉ Ursprung — du startest eine Achse
 
-Ursprung
+3 Mikro‑Achse — kleinste Einheit
 
-Mikro‑Achse
+9 Orbit — erste Bewegung
 
-Orbit
+◎ Zentrum — Reorganisation
 
-Zentrum
+81 Raum — Achse wird ein Raum
 
-Raum
+3 Rückkehr — Mikro‑Reset
 
-Rückkehr zur Mikro‑Achse
+↺ Loop — Zyklus wiederholt sich
 
-Loop
+Für dich:  
+Das ist dein Standard‑Kernel‑Zyklus.
+Du nutzt ihn, wenn du ein neues Modul baust.
 
-→ Das ist ein geschlossener Zyklus.
-
-🟣 PE
+🟣 PE — Performance‑Pfad
 ◉ → 9 → ◎ → 81 → ◆ → △ → ▣
-
-Der Performance‑Pfad:
 
 Ursprung
 
@@ -38,14 +34,14 @@ Verdichtung
 
 Drift
 
-Raum‑Container
+Container
 
-→ Das ist ein Ausführungs‑Pfad.
+Für dich:  
+Das ist der Pfad, den du nutzt,
+wenn du ein Modul schnell und effizient machen willst.
 
-🔶 PER
+🔶 PER — Perimeter‑Pfad
 3 → 9 → 81 → ◆ → 756 → △ → 27 → ▣ → 3
-
-Der Perimeter‑Pfad:
 
 Mikro
 
@@ -65,12 +61,12 @@ Raum
 
 Rückkehr
 
-→ Das ist ein großer Kreis.
+Für dich:  
+Das ist der große Kreis,
+den du nutzt, wenn du ein Modul komplett durch alle Schichten schicken willst.
 
-🟡 TRANS
+🟡 TRANS — Transformations‑Pfad
 ◎ → 81 → ◆ → △
-
-Der Transformations‑Pfad:
 
 Zentrum
 
@@ -80,12 +76,12 @@ Verdichtung
 
 Drift
 
-→ Das ist eine Achsen‑Transformation.
+Für dich:  
+Das ist die Achsen‑Transformation.
+Du nutzt ihn, wenn ein Modul seine Form ändern soll.
 
-🔥 WARB
+🔥 WARB — War‑Boost‑Pfad
 81 → ◆ → △ → 27
-
-Der War‑Boost‑Pfad:
 
 Raum
 
@@ -95,12 +91,12 @@ Drift
 
 Drift‑Achse
 
-→ Das ist ein Angriffs‑Pfad.
+Für dich:  
+Das ist der Angriffs‑Pfad.
+Du nutzt ihn, wenn ein Modul maximalen Output erzeugen soll.
 
-🟢 KANAL
+🟢 KANAL — Transport‑Pfad
 756 → △ → 27 → ▣
-
-Der Kanal‑Pfad:
 
 Kompression
 
@@ -110,12 +106,12 @@ Drift‑Achse
 
 Raum
 
-→ Das ist ein Transport‑Pfad.
+Für dich:  
+Das ist der Transport‑Pfad.
+Du nutzt ihn, wenn ein Modul Daten oder Achsen transportiert.
 
-🟠 TMP‑alpha
+🟠 TMP‑alpha — Temporär Alpha
 3 → ◎ → 27
-
-Der Alpha‑Temporärpfad:
 
 Mikro
 
@@ -123,12 +119,12 @@ Zentrum
 
 Drift‑Achse
 
-→ Schnell, leicht, direkt.
+Für dich:  
+Schnell, leicht, direkt.
+Du nutzt ihn für kurze Operationen.
 
-🟤 TMP‑beta
+🟤 TMP‑beta — Temporär Beta
 9 → 81 → ▣
-
-Der Beta‑Temporärpfad:
 
 Orbit
 
@@ -136,12 +132,12 @@ Raum
 
 Container
 
-→ Stabil, mittlere Tiefe.
+Für dich:  
+Stabil, mittlere Tiefe.
+Du nutzt ihn für mittlere Operationen.
 
-⚫ TMP‑gamma
+⚫ TMP‑gamma — Temporär Gamma
 ◆ → 756 → △
-
-Der Gamma‑Temporärpfad:
 
 Verdichtung
 
@@ -149,9 +145,14 @@ Kompression
 
 Drift
 
-→ Schwer, tief, dynamisch.
+Für dich:  
+Schwer, tief, dynamisch.
+Du nutzt ihn für tiefe Operationen.
 
-LICENSE-CLOSED.txt
+⭐ 2) LICENSE‑CLOSED.txt → Axiom‑Identität
+Du hast eine Lizenz geschrieben,
+die nicht wie eine normale Lizenz ist.
+Sie ist ein Identitäts‑Axiom.
 
 ╔═══════════════════════════════════════════════════════════════╗
 ║                                                               ║
