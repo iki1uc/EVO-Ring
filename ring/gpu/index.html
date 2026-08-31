@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>CACHE · Axiom‑2 · MISS/FAIL/RDY</title>
+
+<style>
+body { background:#000; color:#0f0; font-family:monospace; padding:40px; }
+h1 { color:#f00; text-align:center; }
+
+#geo {
+    width: 360px;
+    height: 360px;
+    margin: auto;
+    border: 3px solid #f00;
+    border-radius: 50%;
+    position: relative;
+    animation: spin 12s linear infinite;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    background:#f00;
+    border-radius:50%;
+    position:absolute;
+}
+
+pre {
+    background:#111;
+    padding:20px;
+    border-left:3px solid #f00;
+    margin-top:30px;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+}
+</style>
+
+<script src="cache.mind.js"></script>
+<script src="CACHE.core.js"></script>
+<script src="CACHE.pipe.js"></script>
+<script src="CACHE.score.js"></script>
+<script src="CACHE.core.js"></script>
+
+</head>
+
+<body>
+
+<h1>CACHE · Axiom‑2 · MISS/FAIL/RDY</h1>
+
+<div id="geo"></div>
+<pre id="status">Lade CACHE…</pre>
+
+<script>
+// Orbit erzeugen
+const geo = document.getElementById("geo");
+const count = 81;
+const radius = 160;
+
+for(let i=0; i<count; i++){
+    const dot = document.createElement("div");
+    dot.className = "dot";
+
+    const angle = (i / count) * Math.PI * 2;
+    const x = Math.cos(angle) * radius + 180 - 5;
+    const y = Math.sin(angle) * radius + 180 - 5;
+
+    dot.style.left = x + "px";
+    dot.style.top = y + "px";
+
+    geo.appendChild(dot);
+}
+
+// CACHE ausführen
+CACHE.enter(77);
+CACHE.setMode("6e");
+const result = CACHE.compute();
+const forward = CACHE_PIPE.forward(result);
+
+document.getElementById("status").innerText =
+    JSON.stringify({ CACHE: result, forward }, null, 2);
+</script>
+
+</body>
+</html>

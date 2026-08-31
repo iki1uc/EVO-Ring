@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>CACHE · ID · MISS/FAIL/RDY</title>
+
+<style>
+body { background:#000; color:#0f0; font-family:monospace; text-align:center; padding:40px; }
+
+#geo {
+    width: 260px;
+    height: 260px;
+    margin: auto;
+    border: 3px solid #f00;
+    border-radius: 50%;
+    position: relative;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    background:#f00;
+    border-radius:50%;
+    position:absolute;
+}
+</style>
+</head>
+
+<body>
+
+<h1>CACHE · ID · MISS/FAIL/RDY</h1>
+
+<div id="geo"></div>
+
+<script>
+const geo = document.getElementById("geo");
+const count = 24;
+const radius = 120;
+
+for(let i=0; i<count; i++){
+    const dot = document.createElement("div");
+    dot.className = "dot";
+
+    const angle = (i / count) * Math.PI * 2;
+    const x = Math.cos(angle) * radius + 130 - 6;
+    const y = Math.sin(angle) * radius + 130 - 6;
+
+    dot.style.left = x + "px";
+    dot.style.top = y + "px";
+
+    geo.appendChild(dot);
+}
+</script>
+
+</body>
+</html>
