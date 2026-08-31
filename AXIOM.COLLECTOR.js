@@ -1,5 +1,5 @@
 // ======================================================
-// AXIOM.COLLECTOR.js — EVO-Ring + AXIOM + PIPELINE + ENERGY
+// AXIOM.COLLECTOR.js — EVO-Ring + AXIOM + PIPELINE + ENERGY + ECHO + HALL
 // ======================================================
 
 import { buildAxiomPipelineMatrix } from "./sli.sys";
@@ -8,7 +8,7 @@ import { ZOOG } from "./ZOOG.js";
 import { DRUUCK } from "./DRUUCK.js";
 
 // EVO-Ring Segment
-function evoRingSegment(axiom, pipe){
+function evoRing(axiom, pipe){
   return `${axiom}::${pipe}`;
 }
 
@@ -38,7 +38,7 @@ export function AXIOM_COLLECTOR(value = 1){
       pipe: entry.pipe,
 
       // EVO-Ring
-      ring: evoRingSegment(entry.axiom, entry.pipe),
+      ring: evoRing(entry.axiom, entry.pipe),
 
       // EVO-Pyramide
       pyramid: evoPyramid(entry.axiom),
