@@ -1,1 +1,19 @@
+export const SLI_ACTIVE = {
+  FIRE(x) {
+    return {
+      org: ULTRA.ORG(x),
+      reorg: ULTRA.REORG(x),
+      nc: ULTRA.NC(x),
+      state: "FIRE"
+    };
+  },
+  ICE() {
+    return {
+      org: 0,
+      reorg: 0,
+      nc: 0,
+      state: "ICE"
+    };
+  }
+};
 
